@@ -1,0 +1,61 @@
+#!/bin/bash
+set -eu
+set -o pipefail
+
+function not_specify_url() {
+  cat << EOF >&2
+You should specify your Redmine issues url, like bellow...
+  echo "export GIT_REDMINE_URL=https://your.redmine.example.com/issues/" >> /path/to/your/profile
+or
+  git config --global git-redmine.url "https://your.redmine.example.com/issues/"
+or
+  git config git-redmine.url "https://your.redmine.example.com/issues/"
+or
+EOF
+}
+
+function get_redmine_url() {
+  set +eu
+
+  local url=$(git config --get git-redmine.url)
+  if [ -z "${url}"  ]; then
+    url="${GIT_REDMINE_URL}"
+  fi
+
+  set -eu
+
+  echo ${url}
+}
+
+issue_no=$(git symbolic-ref --short HEAD | sed -e 's/[^0-9]//g')
+if [ -z "${issue_no}"  ]; then
+  echo "Maybe this branch is not associated with any issues."
+  exit 0
+fi
+
+url=$(get_redmine_url)
+if [ -z "${url}"  ]; then
+  not_specify_url
+  exit 1
+fi
+
+case "$(uname -s)" in
+   Darwin)
+     cmd=open
+     ;;
+   Linux)
+     # TODO
+     # cmd=xdg-open
+     ;;
+   CYGWIN*|MINGW32*|MSYS*|MINGW*)
+     # TODO
+     # cmd="start chrome"
+     ;;
+   *)
+     echo "Not guaranteed "
+     exit 0
+     ;;
+esac
+
+
+${cmd} "${url}${issue_no}"
