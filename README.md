@@ -41,8 +41,9 @@ $ git config git-redmine.url "https://your.redmine.example.com/issues/"
 
 ## ToDo
 
-* Windows, Linux support.
-* Create Homebrew formula.
+* [ ] Windows support.
+* [ ] Linux support.
+* [ ] Create Homebrew formula.
 
 ## Licence
 
