@@ -17,14 +17,16 @@ EOF
 function get_redmine_url() {
   set +eu
 
-  local url=$(git config --get git-redmine.url)
+  local url=""
+  url=$(git config --get git-redmine.url)
+
   if [ -z "${url}"  ]; then
     url="${GIT_REDMINE_URL}"
   fi
 
   set -eu
 
-  echo ${url}
+  echo "${url}"
 }
 
 issue_no=$(git symbolic-ref --short HEAD | sed -e 's/[^0-9]//g')
