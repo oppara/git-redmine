@@ -48,8 +48,7 @@ case "$(uname -s)" in
      # cmd=xdg-open
      ;;
    CYGWIN*|MINGW32*|MSYS*|MINGW*)
-     # TODO
-     # cmd="start chrome"
+     cmd=start
      ;;
    *)
      echo "Not guaranteed "
