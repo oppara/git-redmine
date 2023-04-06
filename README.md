@@ -12,7 +12,7 @@ If the name of Git branch includes the Redmine issue number like bellow, display
 
 ## Requirement
 
-* macOS
+* [Git](https://git-scm.com/)
 
 ## Usage
 
@@ -41,7 +41,7 @@ $ git config git-redmine.url "https://your.redmine.example.com/issues/"
 
 ## ToDo
 
-* [ ] Windows support.
+* [x] Windows support.
 * [ ] Linux support.
 * [ ] Create Homebrew formula.
 
